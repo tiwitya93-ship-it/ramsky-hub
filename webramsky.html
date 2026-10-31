@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RAMSKY HUB</title>
+  <style>
+    /* =========================================
+       PENGATURAN WARNA MERAH & TEMA GELAP
+       ========================================= */
+    :root {
+      --bg-color: #0a0a0c;       
+      --card-bg: #14151a;        
+      --primary-red: #ff2a2a;    
+      --primary-dark: #b30000;   
+      --text-main: #ffffff;      
+      --text-muted: #8b92a5;     
+      --border-color: #242731;   
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    .app-container {
+      width: 100%;
+      max-width: 450px;
+      padding: 15px;
+      box-sizing: border-box;
+      padding-bottom: 40px;
+    }
+
+    /* =========================================
+       HEADER & PROFIL
+       ========================================= */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .logo {
+      font-size: 18px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-icon {
+      width: 30px;
+      height: 30px;
+      background: linear-gradient(135deg, var(--primary-red), #5a0000);
+      border-radius: 6px;
+      box-shadow: 0 0 10px rgba(255, 42, 42, 0.4);
+      display: inline-block;
+    }
+
+    .profile {
+      background-color: var(--card-bg);
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .profile-dot {
+      width: 8px;
+      height: 8px;
+      background-color: var(--primary-red);
+      border-radius: 50%;
+      box-shadow: 0 0 5px var(--primary-red);
+    }
+
+    /* =========================================
+       KOTAK KARTU
+       ========================================= */
+    .card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 15px;
+    }
+
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+    
+    .info-row.dashed {
+      margin-bottom: 0;
+      padding-top: 10px;
+      border-top: 1px dashed var(--border-color);
+    }
+
+    .text-red { color: var(--primary-red); font-weight: bold; }
+
+    /* =========================================
+       FORM & INPUT
+       ========================================= */
+    .input-field {
+      width: 100%;
+      background-color: var(--bg-color);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 12px;
+      border-radius: 8px;
+      box-sizing: border-box;
+      margin-bottom: 10px;
+      font-size: 13px;
+    }
+
+    .input-field:focus {
+      outline: none;
+      border-color: var(--primary-red);
+      box-shadow: 0 0 5px rgba(255, 42, 42, 0.3);
+    }
+
+    label {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .platform-badges {
+      font-size: 10px;
+      color: var(--primary-red);
+      font-weight: bold;
+    }
+
+    /* =========================================
+       SLIDER PENGATURAN (ADVANCED SETTINGS)
+       ========================================= */
+    .slider-row {
+      margin-top: 15px;
+    }
+
+    .slider-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+
+    input[type=range] {
+      width: 100%;
+      accent-color: var(--primary-red);
+    }
+
+    /* =========================================
+       MENU ROBLOX (PENGATURAN TERSEMBUNYI)
+       ========================================= */
+    .btn-toggle {
+      background-color: transparent;
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 11px;
+      cursor: pointer;
+    }
+
+    .btn-toggle:hover { background-color: var(--bg-color); }
+
+    .roblox-panel {
+      display: none; /* Otomatis tersembunyi */
+      background-color: var(--bg-color);
+      padding: 15px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      margin-top: 10px;
+    }
+
+    #statusAkun {
+      font-size: 11px;
+      margin-top: 8px;
+      color: var(--text-muted);
+    }
+
+    /* =========================================
+       TOMBOL AKSI UTAMA
+       ========================================= */
+    .btn-submit {
+      width: 100%;
+      background-color: var(--primary-red);
+      color: #fff;
+      font-weight: bold;
+      font-size: 14px;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 10px;
+      box-shadow: 0 4px 15px rgba(255, 42, 42, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    .btn-submit:active { transform: scale(0.98); }
+
+    .btn-outline {
+      background-color: transparent;
+      color: var(--primary-red);
+      border: 1px solid var(--primary-red);
+      box-shadow: none;
+    }
+
+    .btn-outline:hover { background-color: rgba(255, 42, 42, 0.1); }
+
+    /* Panel Status Kerja Mesin */
+    #statusMesin {
+      display: none;
+      background-color: var(--bg-color);
+      border: 1px solid var(--primary-red);
+      border-radius: 8px;
+      padding: 12px;
+      margin-top: 15px;
+      font-size: 12px;
+      color: var(--primary-red);
+      text-align: center;
+      animation: kedip 1s infinite;
+    }
+
+    @keyframes kedip {
+      0% { opacity: 0.7; }
+      50% { opacity: 1; }
+      100% { opacity: 0.7; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+    
+    <!-- HEADER -->
+    <div class="header">
+      <div class="logo">
+        <div class="logo-icon"></div>
+        RAMSKY HUB
+      </div>
+      <div class="profile">
+        <div class="profile-dot"></div>
+        ramzskuy
+      </div>
+    </div>
+
+    <!-- KARTU STATUS -->
+    <div class="card">
+      <div class="info-row">
+        <span>⚡ Bypass Quota:</span><span>0 / 3</span>
+      </div>
+      <div class="info-row">
+        <span>🎛️ Manual Editor:</span><span>0 / 2</span>
+      </div>
+      <div class="info-row dashed">
+        <span>✨ Clean Only:</span><span class="text-red">∞ Unlimited</span>
+      </div>
+    </div>
+
+    <!-- KARTU INPUT URL -->
+    <div class="card">
+      <label>
+        Source URL Link
+        <span class="platform-badges">YT | TIKTOK | SOUNDCLOUD</span>
+      </label>
+      <input type="text" class="input-field" placeholder="Tempel URL Video/Lagu di sini..." id="urlInput">
+    </div>
+
+    <!-- KARTU ADVANCED SETTINGS -->
+    <div class="card">
+      <div style="font-size: 13px; font-weight: bold; margin-bottom: 15px;">
+        ⚙️ Advanced Settings
+      </div>
+
+      <div class="slider-row">
+        <div class="slider-header">
+          <label style="margin-bottom: 0;">Pitch / Speed Bypass Factor</label>
+          <span id="speedValue" class="text-red">2.5x</span>
+        </div>
+        <input type="range" min="1" max="4" step="0.1" value="2.5" id="speedSlider" oninput="updateNilai()">
+      </div>
+
+      <div class="slider-row">
+        <div class="slider-header">
+          <label style="margin-bottom: 0;">Volume Amplification</label>
+          <span id="volumeValue" class="text-red">-10 dB</span>
+        </div>
+        <input type="range" min="-20" max="0" step="1" value="-10" id="volumeSlider" oninput="updateNilai()">
+      </div>
+    </div>
+
+    <!-- KARTU INTEGRASI ROBLOX -->
+    <div class="card">
+      <div class="info-row">
+        <span style="font-size: 13px; font-weight: bold;">🔗 Integrasi Akun Roblox</span>
+        <!-- Type="button" mencegah tombol merefresh halaman di beberapa browser HP -->
+        <button type="button" class="btn-toggle" id="tombolMenu" onclick="bukaTutupMenu()">Buka Menu</button>
+      </div>
+
+      <div class="roblox-panel" id="panelRoblox">
+        <label>Roblox API Key</label>
+        <input type="password" class="input-field" placeholder="Masukkan API Key" id="apiKey">
+        
+        <label>Roblox User ID</label>
+        <input type="text" class="input-field" placeholder="ID Akun Roblox" id="userId">
+        
+        <button type="button" class="btn-submit" style="padding: 10px; font-size: 12px; margin-top: 5px;" onclick="tautkanAkun()">
+          Simpan Akun
+        </button>
+        <div id="statusAkun">❌ Belum ada akun yang tertaut.</div>
+      </div>
+    </div>
+
+    <!-- PANEL STATUS MESIN -->
+    <div id="statusMesin">Memproses...</div>
+
+    <!-- TOMBOL AKSI UTAMA -->
+    <button type="button" class="btn-submit btn-outline" onclick="prosesMesin('unduh')">
+      ⬇️ Bypass & Unduh Audio (Tanpa Upload)
+    </button>
+
+    <button type="button" class="btn-submit" onclick="prosesMesin('upload')">
+      ☁️ Bypass & Upload Langsung ke Roblox
+    </button>
+
+  </div>
+
+  <script>
+    let akunTertaut = false;
+
+    // 1. Fungsi Buka/Tutup (Menggunakan gaya yang paling aman untuk HP)
+    function bukaTutupMenu() {
+      let panel = document.getElementById("panelRoblox");
+      let tombol = document.getElementById("tombolMenu");
+      
+      // Cek apakah display-nya sedang "block" (terbuka)
+      if (panel.style.display === "block") {
+        panel.style.display = "none";
+        tombol.innerText = "Buka Menu";
+      } else {
+        panel.style.display = "block";
+        tombol.innerText = "Tutup Menu";
+      }
+    }
+
+    // 2. Fungsi Tautkan Akun
+    function tautkanAkun() {
+      let api = document.getElementById("apiKey").value;
+      let user = document.getElementById("userId").value;
+      let teksStatus = document.getElementById("statusAkun");
+
+      if (api === "" || user === "") {
+        akunTertaut = false;
+        teksStatus.innerText = "❌ Gagal: API Key dan User ID harus diisi!";
+        teksStatus.style.color = "var(--primary-red)";
+      } else {
+        akunTertaut = true;
+        teksStatus.innerText = "✅ Berhasil ditautkan! (ID: " + user + ")";
+        teksStatus.style.color = "#00e676"; 
+      }
+    }
+
+    // 3. Fungsi Slider Angka
+    function updateNilai() {
+      let speed = document.getElementById("speedSlider").value;
+      let volume = document.getElementById("volumeSlider").value;
+      
+      document.getElementById("speedValue").innerText = speed + "x";
+      document.getElementById("volumeValue").innerText = volume + " dB";
+    }
+
+    // 4. Fungsi Mesin Utama
+    function prosesMesin(jenisAksi) {
+      let link = document.getElementById("urlInput").value;
+      let panelMesin = document.getElementById("statusMesin");
+
+      if (link === "") {
+        alert("Peringatan: URL Lagu wajib diisi!");
+        return;
+      }
+
+      if (jenisAksi === 'upload' && akunTertaut === false) {
+        alert("AKSES DITOLAK! ⛔\n\nKamu harus menautkan akun Roblox terlebih dahulu.\nSilakan tekan tombol 'Buka Menu' di bagian Integrasi Akun Roblox lalu masukkan API & ID kamu.");
+        return;
+      }
+
+      panelMesin.style.display = "block";
+      
+      if (jenisAksi === 'unduh') {
+        panelMesin.innerText = "Mesin membersihkan audio & menyiapkan file MP3...";
+        setTimeout(() => {
+          panelMesin.style.display = "none";
+          alert("✅ SUKSES!\nFile audio hasil bypass telah siap diunduh ke perangkatmu.");
+        }, 2500);
+      } 
+      
+      else if (jenisAksi === 'upload') {
+        let user = document.getElementById("userId").value;
+        panelMesin.innerText = "[1/2] Membersihkan audio...";
+        
+        setTimeout(() => {
+          panelMesin.innerText = "[2/2] Mengunggah file ke Roblox ID: " + user + "...";
+        }, 2000);
+
+        setTimeout(() => {
+          panelMesin.style.display = "none";
+          alert("✅ UPLOAD SUKSES!\nAudio berhasil di-inject ke inventory Roblox kamu.");
+        }, 4000);
+      }
+    }
+  </script>
+
+</body>
+</html>
